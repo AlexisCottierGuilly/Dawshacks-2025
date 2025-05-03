@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c505386cbbf1b1b4a8e721b1445bc8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scheduleData: {fileID: 0}
+  scheduleData: {fileID: 11400000, guid: 7233f1b066669b846ad073fc5885ba39, type: 2}
 --- !u!4 &333810528
 Transform:
   m_ObjectHideFlags: 0

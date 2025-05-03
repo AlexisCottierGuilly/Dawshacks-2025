@@ -39,6 +39,5 @@ public class TimeSlotInfo
 [System.Serializable]
 public class TimeInfo
 {
-    public int hour;  // 9
-    public int minute;  // 30
+    public Vector2Int time;  // Hour, Minute
 }
