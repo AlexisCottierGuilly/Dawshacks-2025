@@ -86,4 +86,8 @@ public class TimeSlotInfo
 public class TimeInfo
 {
     public Vector2Int time;  // Hour, Minute
+
+    public int Minutes() {
+        return time.x * 60 + time.y;
+    }
 }
