@@ -12,15 +12,160 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3189a1d33dd41b446a708026fea292bf, type: 3}
   m_Name: Schedule
   m_EditorClassIdentifier: 
-  classes:
-  - name: Bio
+  courses:
+  - name: Calculus
     classes:
-    - name: Bio-134
-      teacher: Dr. Smith
-      location: D-3012
+    - name: 102
+      teacher: John Smith
+      location: D-100
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+      - day: 2
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+    - name: 103
+      teacher: John Smith
+      location: D-101
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 12, y: 15}
+        endTime:
+          time: {x: 2, y: 15}
+      - day: 2
+        startTime:
+          time: {x: 12, y: 15}
+        endTime:
+          time: {x: 2, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 12, y: 15}
+        endTime:
+          time: {x: 2, y: 15}
+    - name: 104
+      teacher: John Smith
+      location: D-102
       timeSlots:
       - day: 1
         startTime:
-          time: {x: 8, y: 0}
+          time: {x: 5, y: 15}
         endTime:
-          time: {x: 10, y: 0}
+          time: {x: 7, y: 15}
+  - name: French
+    classes:
+    - name: 102
+      teacher: Jonna Smitha
+      location: F-100
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+    - name: 103
+      teacher: Jonna Smitha
+      location: F-101
+      timeSlots:
+      - day: 1
+        startTime:
+          time: {x: 12, y: 15}
+        endTime:
+          time: {x: 2, y: 15}
+      - day: 3
+        startTime:
+          time: {x: 12, y: 15}
+        endTime:
+          time: {x: 2, y: 15}
+    - name: 104
+      teacher: Jonna Smitha
+      location: F-102
+      timeSlots:
+      - day: 1
+        startTime:
+          time: {x: 9, y: 15}
+        endTime:
+          time: {x: 11, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 9, y: 15}
+        endTime:
+          time: {x: 11, y: 15}
+    - name: 105
+      teacher: Jonna Smitha
+      location: F-103
+      timeSlots:
+      - day: 1
+        startTime:
+          time: {x: 3, y: 15}
+        endTime:
+          time: {x: 4, y: 15}
+  - name: English
+    classes:
+    - name: 102
+      teacher: Matthew Vann
+      location: A-100
+      timeSlots:
+      - day: 1
+        startTime:
+          time: {x: 1, y: 15}
+        endTime:
+          time: {x: 3, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 1, y: 15}
+        endTime:
+          time: {x: 3, y: 15}
+    - name: 103
+      teacher: Matthew Vann
+      location: A-101
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 4, y: 15}
+        endTime:
+          time: {x: 6, y: 15}
+      - day: 4
+        startTime:
+          time: {x: 4, y: 15}
+        endTime:
+          time: {x: 6, y: 15}
+    - name: 104
+      teacher: Matthew Vann
+      location: A-102
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 8, y: 15}
+        endTime:
+          time: {x: 10, y: 15}
+      - day: 2
+        startTime:
+          time: {x: 9, y: 15}
+        endTime:
+          time: {x: 11, y: 15}
+    - name: 105
+      teacher: Matthew Vann
+      location: A-103
+      timeSlots:
+      - day: 4
+        startTime:
+          time: {x: 6, y: 15}
+        endTime:
+          time: {x: 7, y: 15}
+  numBlocks: 20
