@@ -19,8 +19,8 @@ MonoBehaviour:
       teacher: Dr. Smith
       location: D-3012
       timeSlots:
-      - day: 0
+      - day: 1
         startTime:
-          time: {x: 0, y: 0}
+          time: {x: 8, y: 0}
         endTime:
-          time: {x: 0, y: 0}
+          time: {x: 10, y: 0}
