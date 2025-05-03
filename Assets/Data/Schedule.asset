@@ -42,26 +42,17 @@ MonoBehaviour:
         startTime:
           time: {x: 12, y: 15}
         endTime:
-          time: {x: 2, y: 15}
+          time: {x: 14, y: 15}
       - day: 2
         startTime:
           time: {x: 12, y: 15}
         endTime:
-          time: {x: 2, y: 15}
+          time: {x: 14, y: 15}
       - day: 4
         startTime:
           time: {x: 12, y: 15}
         endTime:
-          time: {x: 2, y: 15}
-    - name: 104
-      teacher: John Smith
-      location: D-102
-      timeSlots:
-      - day: 1
-        startTime:
-          time: {x: 5, y: 15}
-        endTime:
-          time: {x: 7, y: 15}
+          time: {x: 14, y: 15}
   - name: French
     classes:
     - name: 102
@@ -86,12 +77,12 @@ MonoBehaviour:
         startTime:
           time: {x: 12, y: 15}
         endTime:
-          time: {x: 2, y: 15}
+          time: {x: 14, y: 15}
       - day: 3
         startTime:
           time: {x: 12, y: 15}
         endTime:
-          time: {x: 2, y: 15}
+          time: {x: 14, y: 15}
     - name: 104
       teacher: Jonna Smitha
       location: F-102
@@ -168,4 +159,6 @@ MonoBehaviour:
           time: {x: 6, y: 15}
         endTime:
           time: {x: 7, y: 15}
-  numBlocks: 20
+  earliestStartTime: 75
+  latestEndTime: 855
+  numBlocks: 26

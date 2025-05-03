@@ -34,6 +34,7 @@ public class ScheduleData : ScriptableObject
             }
         }
         numBlocks = (latestEndTime - earliestStartTime) / 30;
+        Debug.Log("Earliest start time: " + earliestStartTime + " Latest end time: " + latestEndTime + " Number of blocks: " + numBlocks);
         //convert each time slot to a timeblock
         foreach (CourseInfo course in courses) {
             foreach (ClassInfo classInfo in course.classes) {
