@@ -67,9 +67,13 @@ public class PartialSchedule {
 public class Scheduler : MonoBehaviour
 {
     private ScheduleData scheduleData;
+    public static Scheduler instance;
     private void Awake()
     {
-        
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }   
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

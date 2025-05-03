@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using SectionID = System.Tuple<int, int>;
 public class ScheduleUIGenerator : MonoBehaviour
 {
     [Header("Prefabs")]
@@ -8,11 +8,14 @@ public class ScheduleUIGenerator : MonoBehaviour
     public GameObject scheduleParent;
     public GameObject classPrefab;
 
+    public GameObject SchedulesAll;
+
     private List<List<System.Tuple<int, int>>> timeBlocks = new(); // [day, day, day], day: [blockID, blockID, blockID], blockID: [courseIndex, classIndex]
     private List<ClassBlockTimes> allClassBlockTimes = new();
 
     void Start()
     {
+        /*
         // in timeBlocks, to show no class, use (-1, -1) in blockID
         timeBlocks = new List<List<System.Tuple<int, int>>>()
         {
@@ -29,10 +32,48 @@ public class ScheduleUIGenerator : MonoBehaviour
             },
         };
 
-        GenerateSchedule(timeBlocks);
+        GenerateSchedule(timeBlocks);*/
     }
 
-    public void GenerateSchedule(List<List<System.Tuple<int, int>>> timeBlocks)
+    public void GenerateAll(List<PartialSchedule> partialSchedules)
+    {
+        float currentYPos = -30;
+        int i = 0;
+        foreach (PartialSchedule partialSchedule in partialSchedules)
+        {
+            GenerateScheduleArray(partialSchedule.timeBlocks, currentYPos);
+            currentYPos -= 300f;
+            i++;
+            if (i >= 5) // limit to 5 schedules
+            {
+                break;
+            }
+        }
+    }
+
+    public List<List<System.Tuple<int, int>>> Array2DToFormat(SectionID[,] array2D)
+    {
+        List<List<System.Tuple<int, int>>> result = new List<List<System.Tuple<int, int>>>();
+
+        for (int i = 0; i < array2D.GetLength(0); i++)
+        {
+            List<System.Tuple<int, int>> dayBlocks = new List<System.Tuple<int, int>>();
+            for (int j = 0; j < array2D.GetLength(1); j++)
+            {
+                dayBlocks.Add(array2D[i, j]);
+            }
+            result.Add(dayBlocks);
+        }
+        return result;
+    }
+
+    public void GenerateScheduleArray(SectionID[,] array2D, float curreentYPos=0f)
+    {
+        timeBlocks = Array2DToFormat(array2D);
+        GenerateSchedule(timeBlocks, curreentYPos);
+    }
+
+    public void GenerateSchedule(List<List<System.Tuple<int, int>>> timeBlocks, float currentYPos=0f)
     {
         int minTime = GameManager.instance.scheduleData.earliestStartTime;
         int maxTime = GameManager.instance.scheduleData.latestEndTime;
@@ -45,12 +86,18 @@ public class ScheduleUIGenerator : MonoBehaviour
         List<RectTransform> daySpaces = schedule.GetComponent<ScheduleManager>().daySpaces;
         schedule.SetActive(true);
         schedule.transform.localPosition = Vector3.zero;
+        schedule.transform.position = new Vector3(
+            schedule.transform.position.x,
+            schedule.transform.position.y + currentYPos,
+            schedule.transform.position.z
+        );
 
         foreach (ClassBlockTimes cbt in allClassBlockTimes)
         {
             RectTransform daySpace = daySpaces[(int)cbt.day];
             int startMins = cbt.timeSlotInfo.startTime.Minutes();
             int endMins = cbt.timeSlotInfo.endTime.Minutes();
+            endMins = (int)(endMins / 2f);
 
             float startPercentage = (startMins - minTime) / (float)(maxTime - minTime);
             float endPercentage = (endMins - minTime) / (float)(maxTime - minTime);

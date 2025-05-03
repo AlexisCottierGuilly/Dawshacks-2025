@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9360564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -282,6 +282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scheduleData: {fileID: 11400000, guid: 7233f1b066669b846ad073fc5885ba39, type: 2}
+  scheduler: {fileID: 867497817}
+  scheduleGenerator: {fileID: 0}
 --- !u!4 &333810528
 Transform:
   m_ObjectHideFlags: 0
