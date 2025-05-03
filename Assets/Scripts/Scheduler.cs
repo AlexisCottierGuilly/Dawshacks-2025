@@ -11,8 +11,8 @@ using System;
 using Unity.VisualScripting; // (day, blockID)
 public class PartialSchedule {
 
-    public float lateStartWeight = 0.3f; // weight for starting later most days
-    public float earlyEndWeight = 0.12f; // weight for ending earlier most days
+    public float lateStartWeight = 0.5f; // weight for starting later most days
+    public float earlyEndWeight = 0.5f; // weight for ending earlier most days
     public float gapPenalty = 0.59f; // penalty for having gaps in the schedule
     public List<SectionID> sections = new List<SectionID>(); // list of sections in the schedule
     public SectionID[,] timeBlocks;
@@ -61,6 +61,30 @@ public class PartialSchedule {
             timeBlocks[(int)block.Item1, (int)block.Item2] = new SectionID(-1, -1);
         }
         sections.RemoveAt(sections.Count - 1); // remove the last section from the schedule
+    }
+
+    public float GetRanking() {
+        //find the average start time and end time of the schedule
+        float startTime = 0; // average start time
+        float endTime = 0; // average end time
+        //float gapLength = 0; // total length of gaps in the schedule
+        for (int i = 0; i < 5; i++) { //each day of the week
+            for (int j = 0; j < timeBlocks.GetLength(1); j++) { //each time block
+                if (timeBlocks[i, j].Item1 != -1) {
+                    startTime += j;
+                    break;
+                }
+            }
+            for (int j = timeBlocks.GetLength(1) - 1; j >= 0; j--) { //each time block
+                if (timeBlocks[i, j].Item1 != -1) {
+                    endTime += timeBlocks.GetLength(1) - j - 1;
+                    break;
+                }
+            }
+        }
+        startTime /= 5; // average start time
+        endTime /= 5; // average end time
+        return startTime * lateStartWeight + endTime * earlyEndWeight; // return the ranking of the schedule
     }
 }
 
@@ -121,7 +145,20 @@ public class Scheduler : MonoBehaviour
                 if (courseID + 1 >= scheduleData.courses.Count) {
                     // if we have added all the classes, we have found a valid schedule
                     Debug.Log("Found a valid schedule!");
-                    schedules.Add(schedule.Clone()); // add the schedule to the list of schedules
+                    float ranking = schedule.GetRanking(); // get the ranking of the schedule
+                    if (schedules.Count == 0) {
+                        schedules.Add(schedule.Clone()); // add the schedule to the list of schedules
+                    } else {
+                        for (int i = 0; i < schedules.Count; i++) {
+                            if (i == schedules.Count - 1) {
+                                schedules.Add(schedule.Clone()); // add the schedule to the list of schedules
+                                break;
+                            } else if (ranking > schedules[i].GetRanking()) {
+                                schedules.Insert(i, schedule.Clone()); // add the schedule to the list of schedules
+                                break;
+                            }
+                        }
+                    }
                     printSchedule(schedule); // print the schedule to the console
                     found = true;
                     //TODO: backtrack to find all schedules
@@ -149,6 +186,7 @@ public class Scheduler : MonoBehaviour
                             printSchedule(schedules[i]); // print the schedule to the console
                         }
                         return schedules; // return the list of schedules
+                        //return schedules; // return the list of schedules
                     }
                     Debug.Log("Removing class " + scheduleData.courses[classIDs.Count - 1].name + " " + stack.Last().name + " from schedule"); // print the name of the class that was removed
                     printSchedule(schedule); // print the schedule to the console
