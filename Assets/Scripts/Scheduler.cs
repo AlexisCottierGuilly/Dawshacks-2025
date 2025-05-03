@@ -9,7 +9,11 @@ using System.Security.Cryptography;
 using JetBrains.Annotations;
 using System;
 using Unity.VisualScripting; // (day, blockID)
-class PartialSchedule {
+public class PartialSchedule {
+
+    public float lateStartWeight = 0.3f; // weight for starting later most days
+    public float earlyEndWeight = 0.12f; // weight for ending earlier most days
+    public float gapPenalty = 0.59f; // penalty for having gaps in the schedule
     public List<SectionID> sections = new List<SectionID>(); // list of sections in the schedule
     public SectionID[,] timeBlocks;
 
@@ -63,7 +67,6 @@ class PartialSchedule {
 public class Scheduler : MonoBehaviour
 {
     private ScheduleData scheduleData;
-    private List<PartialSchedule> schedules = new(); // list of all schedules
     private void Awake()
     {
         
@@ -99,7 +102,8 @@ public class Scheduler : MonoBehaviour
         }
         Debug.Log(repr);
     }        
-    public void generateSchedules() {
+    public List<PartialSchedule> generateSchedules() {
+        List<PartialSchedule> schedules = new(); // list of all schedules
         List<ClassInfo> stack = new List<ClassInfo>();
         List<int> classIDs = new List<int>();
         stack.Add(scheduleData.courses[0].classes[0]); // add the first class to the stack
@@ -144,7 +148,7 @@ public class Scheduler : MonoBehaviour
                         for (int i = 0; i < schedules.Count; i++) {
                             printSchedule(schedules[i]); // print the schedule to the console
                         }
-                        return;
+                        return schedules; // return the list of schedules
                     }
                     Debug.Log("Removing class " + scheduleData.courses[classIDs.Count - 1].name + " " + stack.Last().name + " from schedule"); // print the name of the class that was removed
                     printSchedule(schedule); // print the schedule to the console
