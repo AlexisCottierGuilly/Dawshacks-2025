@@ -8,8 +8,8 @@ using BlockID = System.Tuple<int, int>; // (day, blockID)
 public class ScheduleData : ScriptableObject
 {
     public List<CourseInfo> courses = new();
-    private int earliestStartTime = 24 * 60; // 24 hours in minutes
-    private int latestEndTime = 0; // 0 minutes
+    public int earliestStartTime = 24 * 60; // 24 hours in minutes
+    public int latestEndTime = 0; // 0 minutes
     public int numBlocks = 0; // number of 30 minute blocks in a day
     int HourminToMinutes(Vector2Int time) {
         return time.x * 60 + time.y;
@@ -85,4 +85,8 @@ public class TimeSlotInfo
 public class TimeInfo
 {
     public Vector2Int time;  // Hour, Minute
+
+    public int Minutes() {
+        return time.x * 60 + time.y;
+    }
 }
