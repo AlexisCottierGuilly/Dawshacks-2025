@@ -14,4 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   classes:
   - name: Bio
-    classes: []
+    classes:
+    - name: Bio-134
+      teacher: Dr. Smith
+      location: D-3012
+      timeSlots:
+      - day: 0
+        startTime:
+          time: {x: 0, y: 0}
+        endTime:
+          time: {x: 0, y: 0}
